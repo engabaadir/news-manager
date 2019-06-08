@@ -67,3 +67,38 @@ def get_popular_article_authors():
 
     for i, (author, view) in enumerate(results, 1):
         print("[{}] {} -- {} views".format(i, author, view))
+
+
+def get_days_with_errors():
+
+    # Prepare days with more than 1% errors query.
+    query = """
+        SELECT total.day,
+          ROUND(((errors.error_requests*1.0) / total.requests), 3) AS percent
+        FROM (
+          SELECT date_trunc('day', time) "day", count(*) AS error_requests
+          FROM log
+          WHERE log.status != '200 OK'
+          GROUP BY day
+        ) AS errors
+        JOIN (
+          SELECT date_trunc('day', time) "day", count(*) AS requests
+          FROM log
+          GROUP BY day
+          ) AS total
+        ON total.day = errors.day
+        WHERE (ROUND(((errors.error_requests*1.0) / total.requests), 3) > 0.01)
+        ORDER BY percent DESC;
+    """
+
+    # Go to execute query.
+    results = run_query(query)
+
+    # Print output on the screen.
+    print('\nDAYS WITH MORE THAN 1% OF ERRORS:')
+
+    for i in results:
+        date = i[0].strftime('%B %d, %Y')
+        errors = str(round(i[1]*100, 1)) + "%" + " errors"
+        # print(date + " — " + errors)
+        print("{} -- {}".format(date, errors))
