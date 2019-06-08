@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import psycopg2
 
+
 def run_query(query):
     """Connects to the database, runs the query passed to it,
     and returns the results"""
@@ -18,3 +19,25 @@ def run_query(query):
     rows = cr.fetchall()
     db.close()
     return rows
+
+
+def get_top_three_articles():
+
+    # Prepare top three most read articles query
+    query = """
+        SELECT articles.title, COUNT(*) AS num
+        FROM articles
+        JOIN log
+        ON log.path = concat('/article/', articles.slug)
+        GROUP BY articles.title
+        ORDER BY num DESC
+        LIMIT 3;
+    """
+    # Go to execute query
+    results = run_query(query)
+
+    # Print output on the screen
+    print('\nMOST POPULAR THREE ARTICLES OF ALL TIME:')
+    counter = 1
+    for i, (article, view) in enumerate(results, 1):
+        print("[{}] {} -- {} views".format(i, article, view))
