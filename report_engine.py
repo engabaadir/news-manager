@@ -102,3 +102,13 @@ def get_days_with_errors():
         errors = str(round(i[1]*100, 1)) + "%" + " errors"
         # print(date + " — " + errors)
         print("{} -- {}".format(date, errors))
+
+
+if __name__ == '__main__':
+    # Call to Print all output on the screen.
+    print('\n[=========PROCESSING OUTPUT===========]\n')
+    get_top_three_articles()
+    get_popular_article_authors()
+    get_days_with_errors()
+else:
+    print('Importing ...')
