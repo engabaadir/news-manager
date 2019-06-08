@@ -41,3 +41,29 @@ def get_top_three_articles():
     counter = 1
     for i, (article, view) in enumerate(results, 1):
         print("[{}] {} -- {} views".format(i, article, view))
+
+
+def get_popular_article_authors():
+
+    # Prepare most popular authors of all time query
+    query = """
+        SELECT authors.name, COUNT(*) AS num
+        FROM authors
+        JOIN articles
+        ON authors.id = articles.author
+        JOIN log
+        ON log.path = concat('/article/', articles.slug)
+        GROUP BY authors.name
+        ORDER BY num DESC
+        ;
+    """
+
+    # Go to execute query.
+    results = run_query(query)
+
+    # Print output on the screen.
+    print('\nMOST POPULAR ARTICLE AUTHORS OF ALL TIME:')
+    counter = 1
+
+    for i, (author, view) in enumerate(results, 1):
+        print("[{}] {} -- {} views".format(i, author, view))
