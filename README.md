@@ -1,4 +1,4 @@
-# Log Analysis Project
+# News Manager Project
 This is a project for Udacity's 
 [Full Stack Web Developer Nanodegree](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004)
 
@@ -31,20 +31,20 @@ These files will configure the virtual machine and install all the tools needed 
 1. Download the database file: [sql data](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip)
 1. Unzip the data folder to get the newsdata.sql file.
 1. Move the newsdata.sql file into the vagrant directory
-1. Download the project: [log analysis project](https://github.com/engabaadir/log_analysis_project.git)
-1. Upzip it and copy all the files into the vagrant directory into a folder named *log_analysis_project*
+1. Download the project: [News Manager](https://github.com/engabaadir/news-manager.git)
+1. Upzip it and copy all the files into the vagrant directory into a folder named *news_manager_project*
 #### Starting the Virtual Machine:
 1. Open Terminal and navigate to the project folders we setup above.
 1. cd into the vagrant directory
 1. Run ``` vagrant up ``` to build the VM for the first time.
 1. Once it is built, run ``` vagrant ssh ``` to connect.
-1. cd into the correct project directory: ``` cd /vagrant/log_analysis_project ```
+1. cd into the correct project directory: ``` cd /vagrant/news_manager_project ```
 #### Importing the data into the database:
 1. Import the data using the following command: ``` psql -d news -f newsdata.sql ```
 1. Running this command will connect to your installed database server and execute the SQL commands in the downloaded file, creating tables and populating them with data.
 ## Run the project!
-1. If you aren't in *log_analysis_project* directory, cd into the correct project directory: ``` cd /vagrant/log_analysis_project ```
-1. Run ``` python log_analysis.py ```
+1. If you aren't in *news_manager_project* directory, cd into the correct project directory: ``` cd /vagrant/news_manager_project ```
+1. Run ``` python news_manager.py ```
 
 ## Expected Output: 
 
