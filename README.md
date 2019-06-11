@@ -18,7 +18,7 @@ This is a project for Udacity's
 	The log table includes a column status that indicates the HTTP status code that the news site sent 
 	to the user's browser. 
 
-## Core Tools Used for this Project
+## Core Tools Used for this Project:
 1. PostgreSQL database
 2. Python 3.7.3
 ## Project Requirements:
